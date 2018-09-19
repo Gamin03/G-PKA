@@ -121,7 +121,7 @@ def read_pka_file_ng_xs(file_object):
 
 if __name__ == '__main__':
     with open('./test/example_data/F019s-p.asc') as fp:
-        title, mtd, pi, pp, pe_array, A = read_pka_file_energy_group_struc(fp)
+        title, mtd, pi, pe_array, A = read_pka_file_energy_group_struc(fp)
         print("{0:30s} {1:4d}".format(title, mtd))
         while True:
             title, mtd, A = read_pka_file_each_matrix(fp)

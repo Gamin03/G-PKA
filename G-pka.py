@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 """
 Main for G-pka.
 
@@ -20,21 +20,33 @@ Main for G-pka.
                       => 已解决。采用SPECTER-PKA完全相同的方法。
                    4) Zr-93,95,97 共振区域结果不正确！
                       => 已解决。注意(n,gamma)散射矩阵的入射和出射能群下标，以及计算特定群的上下群边界值，这些容易出错。
+        2018/09/19 1) 增加dpa损伤计算功能
+                   2) 输出结果格式的选择，输出最终PKA和dpa结果数据
+                   3) 输出绘图格式，绘图的多种形式，绘图到文件
 
 """
-import sys
-import numpy as np
-import matplotlib.pyplot as plt
+# import sys
+# import numpy as np
+# import matplotlib.pyplot as plt
 
 from nuclide import Element, Nuclide, NuclideRecoil
 from input import Input
 from read_pka_file import *
 from utility_pka import *
 from utility_fig import *
+from utility_basic import *
+
+# Code version control
+_major_version = 0
+_minor_version = 1
+_bugfix_version = 0
+print_code_title_version(_major_version, _minor_version, _bugfix_version)
 
 # Global variables
 global_recoil = {}
 global_element = {}
+
+
 
 # --- Initialization ----------------------------------------------------------
 
@@ -53,6 +65,9 @@ else:
 inp = Input(input_file)
 output = open(output_file, 'w')
 nuclides = []
+
+# Print title into output
+print_code_title_version(_major_version, _minor_version, _bugfix_version, file=output)
 
 energy_group = None  # =====Temp
 
