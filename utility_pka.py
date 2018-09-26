@@ -10,7 +10,7 @@ import numpy as np
 import scipy.sparse as sp
 from scipy import interpolate
 
-from models import define_residual
+from models import define_residual, def_coeffs, def_coeffs_njoy, find_damage_displacement_energy
 
 # General constants
 _avogadro = 6.022141930E+23
@@ -19,6 +19,7 @@ _j_to_mev = 1. / 1.602176565E-13
 _neutron_mass = 1.008664923
 _proton_mass = 1.007825032
 _np_mass_dict = {'n': 1.008664923, 'p': 1.007825032}
+_np_za_dict = {'n':(0, 1), 'p': (1, 1)}
 
 
 # @return (z, a) - means the daughter z and mass number tuple
@@ -122,3 +123,19 @@ def estimate_ng_recoil_matrix(recoil_energy_group, ng_xs_array, parent_mass, key
 
     M = sp.coo_matrix(ng_recoil_kermas)
     return M.T
+
+
+# @parameter incident_za (0, 1) for neutron
+#            target_za (Z, A) for target nuclide
+# @return damage_coeffs_array - in pka energy structure
+def get_damage_coeffs_array(recoil_energy_group, residual_za, target_za):
+    ed = find_damage_displacement_energy(target_za[0])
+    # ed = 40.0 # ====TO be removed!!!
+    coeffs = []
+    emid = (recoil_energy_group[1:] + recoil_energy_group[:-1]) * 0.5 * 1.E+6   # in eV
+    for eg in emid[:]:
+        coeffs.append(def_coeffs(eg, residual_za[0], residual_za[1], target_za[0], target_za[1], ed)[0])
+        # USE NJOY method
+        # coeffs.append(float(def_coeffs_njoy(eg, residual_za[0], residual_za[1], target_za[0], target_za[1], ed)))
+    coeffs = np.array(coeffs)
+    return coeffs, ed

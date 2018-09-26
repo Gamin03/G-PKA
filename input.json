@@ -1,6 +1,10 @@
 {
   "flux_filename" : "test/fluxes_specter.dat",
   "number_pka_files" : 5,
+  "material": {
+    "density": 6.506,
+    "atomic_mass": 91.22364157600980
+  },
   "columns": [
     {
       "pka_filename" : "test/example_data/Zr090s.asc",
@@ -40,5 +44,6 @@
   ],
   "flux_rescale_value" : 3.25e+14,
   "assumed_ed" : 40.0,
-  "do_gamma_estimate" : true
+  "do_gamma_estimate" : true,
+  "plot_figure" : true
 }

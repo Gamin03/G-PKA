@@ -116,7 +116,8 @@ def define_residual(mt, izp, iap, izt, iat):
 # Define function to calculate coefficients of NRT ane MD
 #       z1, a1: projectile
 #       z2, a2: material
-def def_coeffs(e, mt, z1, a1, z2, a2, brk):
+#       e is in MeV
+def def_coeffs(e, z1, a1, z2, a2, brk):
     constant1 = 30.724
     constant2 = 0.0793
     constant3 = 3.4008
@@ -138,7 +139,7 @@ def def_coeffs(e, mt, z1, a1, z2, a2, brk):
     eff = efficiency(z2, df, brk)
     dfeff = df * eff
     # dfeff = df * efficiency(z2, df, brk)
-    return df, dfeff, float(eff)
+    return df, dfeff, eff
 
 
 # efficiency function for Fe from Stoller
@@ -196,3 +197,29 @@ def find_damage_displacement_energy(zz):
     else:
         ed = 25
     return ed
+
+
+# Define another coeffs calculation method like NJOY
+def def_coeffs_njoy(e, z1, a1, z2, a2, brk):
+    abohr = 52.91772108  # in pm
+    ec2 = 1.4399764      # in eVnm
+    twothd = 2./3.
+    threeq = 3./4.
+    sixth = 1./6.
+    onethd = 1./3.
+    onep5 = 1.5
+    c1 = 30.724
+    c2 = 0.07952410617
+    c3 = 3.4008
+    c4 = 0.40244
+
+    el = (ec2 / (abohr * 1.e-3 * (9. * np.pi**2 / 128.)**onethd)) * z1 * z2 * \
+         (z1**twothd + z2**twothd)**0.5 * (a1 + a2) / a2
+    rel = 1. / el
+    denom = (z1**twothd + z2**twothd)**threeq * a1**onep5 * a2**0.5
+    kk = c2 * z1**twothd * z1**0.5 * (a1 + a2)**onep5 / denom
+    ee = e * rel
+    gg = c3 * ee**sixth + c4 * ee**threeq + ee
+    df = e / (1. + kk * gg)
+    return df
+

@@ -62,6 +62,11 @@ class Element:
         self.recoil_pka_spectrum = None         # np.array - Size (num_recoil_pka_energy_group)
         self.average_pka_energy = 0.
 
+        self.damage_function_coeffs = None
+        self.damage_cross_section = None
+        self.damage_dpa = None
+        self.average_displacement_energy = 0.
+
     def __eq__(self, other):
         return self.Z == other.Z
 
@@ -73,6 +78,16 @@ class Element:
 
     def copy_recoil_pka_energy_group(self, other_recoil_pka_energy_group):
         self.recoil_pka_energy_group = other_recoil_pka_energy_group
+
+    def copy_recoil_damage(self, recoil_nuc, ratio):
+        self.damage_function_coeffs = recoil_nuc.damage_function_coeffs * ratio
+        self.damage_cross_section = recoil_nuc.damage_cross_section * ratio
+        self.damage_dpa = recoil_nuc.damage_dpa * ratio
+
+    def add_damage_values(self, recoil_nuc, ratio):
+        self.damage_function_coeffs += recoil_nuc.damage_function_coeffs * ratio
+        self.damage_cross_section += recoil_nuc.damage_cross_section * ratio
+        self.damage_dpa += recoil_nuc.damage_dpa * ratio
 
     def calculate_average_pka_energy(self):
         if self.recoil_pka_spectrum is not None:
@@ -148,12 +163,18 @@ class Nuclide:
         self.num_recoil_energy_group_struc = 0
         self.recoil_energy_group_struc = None       # np.array - SIZE (num_recoil_energy_group_struc + 1)
         self.recoil_flux_pka = None                 # np.array - SIZE (num_recoil_energy_group_struc), Unit = 'n s^{-1}'
-        # self.num_recoil_nuclides_particles = 0     # (n,g) not included --- MAY NOT NEED
+
         self.recoil_nuclides_particles_info = []    # save the recoil and particle matrix info from input file
         self.recoil_nuclides = []                   # save the recoil and particle matrix
         self.ngamma_xs_array = None
 
         self.recoil_pka_spectrum = None             # ONLY used for total pka spectrum of this nuclide
+        self.average_pka_energy = 0.
+
+        self.damage_function_coeffs = None          # ONLY used for total damage function coeffs when needed
+        self.damage_cross_section = None            # ONLY used for total damage cross sections when needed
+        self.damage_dpa = None                      # ONLY used for total dpa when needed
+        self.average_displacement_energy = 0.        # ONLY used for total dpa when needed
 
     def zaid(self):
         return self.Z * 1000 + self.A
@@ -180,6 +201,16 @@ class Nuclide:
     def add_recoil_pka_spectrum(self, other_recoil_pka_spectrum):
         self.recoil_pka_spectrum += other_recoil_pka_spectrum
 
+    def copy_recoil_damage(self, recoil_nuc, ratio):
+        self.damage_function_coeffs = recoil_nuc.damage_function_coeffs * ratio
+        self.damage_cross_section = recoil_nuc.damage_cross_section * ratio
+        self.damage_dpa = recoil_nuc.damage_dpa * ratio
+
+    def add_damage_values(self, recoil_nuc, ratio):
+        self.damage_function_coeffs += recoil_nuc.damage_function_coeffs * ratio
+        self.damage_cross_section += recoil_nuc.damage_cross_section * ratio
+        self.damage_dpa += recoil_nuc.damage_dpa * ratio
+
 
 class NuclideRecoil:
     '''
@@ -194,10 +225,16 @@ class NuclideRecoil:
         self.mtd = mtd
         self.element = _element[self.Z]
         self.name = _element[self.Z] + '-' + str(self.A)
+        self.title = None
         self.mass = 0.
         self.xs_energy_group_struc = None
         self.recoil_matrix = None
         self.pka_spectrum = None
+
+        self.estimate_ed = 0.
+        self.damage_function_coeffs = None
+        self.damage_cross_section = None
+        self.damage_dpa = None
 
     # # Set the matrix energy group structure
     # def set_energy_group_structure(self, eg_array):

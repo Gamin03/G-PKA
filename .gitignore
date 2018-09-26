@@ -16,3 +16,5 @@ __pycache__/utility_pka.cpython-36.pyc
 nist-nuclide-data.txt
 nist_data.py
 output.txt
+*.xls
+*.png
