@@ -2,7 +2,7 @@
 """
 Utility functions for the code.
 
-@author Jimin Ma  <majm03@foxmail.com>
+@author Jimin Ma  <majm03@yeah.net>
 @time   2018-09-11
 
 """
@@ -68,7 +68,6 @@ def interpolate_flux_pka_from_input(flux_in, flux_unit, ebound_in, ebound_pka):
 
 
 # @return ng_recoil_matrix - in pka energy structure
-# TODO: n,g 矩阵的处理还有问题！
 def estimate_ng_recoil_matrix(recoil_energy_group, ng_xs_array, parent_mass, key_n_p, daughter_mass):
 
     incident_mass = _np_mass_dict[key_n_p]
@@ -134,8 +133,9 @@ def get_damage_coeffs_array(recoil_energy_group, residual_za, target_za):
     coeffs = []
     emid = (recoil_energy_group[1:] + recoil_energy_group[:-1]) * 0.5 * 1.E+6   # in eV
     for eg in emid[:]:
-        coeffs.append(def_coeffs(eg, residual_za[0], residual_za[1], target_za[0], target_za[1], ed)[0])
+        # OLD NRT method
+        # coeffs.append(def_coeffs(eg, residual_za[0], residual_za[1], target_za[0], target_za[1], ed)[0])
         # USE NJOY method
-        # coeffs.append(float(def_coeffs_njoy(eg, residual_za[0], residual_za[1], target_za[0], target_za[1], ed)))
+        coeffs.append(float(def_coeffs_njoy(eg, residual_za[0], residual_za[1], target_za[0], target_za[1], ed)))
     coeffs = np.array(coeffs)
     return coeffs, ed

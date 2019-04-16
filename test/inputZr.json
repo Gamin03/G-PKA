@@ -1,0 +1,49 @@
+{
+  "flux_filename" : "fluxes_specter.dat",
+  "number_pka_files" : 5,
+  "material": {
+    "density": 6.506,
+    "atomic_mass": 91.22364157600980
+  },
+  "columns": [
+    {
+      "pka_filename" : "example_data/Zr090s.asc",
+      "pka_ratios" : 0.51450000,
+      "parent" : "Zr-90",
+      "ngamma_parent_mass" : 89.904697659,
+      "ngamma_daughter_mass" : 90.905639587
+    },
+    {
+      "pka_filename" : "example_data/Zr091s.asc",
+      "pka_ratios" : 0.11220000,
+      "parent" : "Zr-91",
+      "ngamma_parent_mass" : 90.905639587,
+      "ngamma_daughter_mass" : 91.905034675
+    },
+    {
+      "pka_filename" : "example_data/Zr092s.asc",
+      "pka_ratios" : 0.17150000,
+      "parent" : "Zr-92",
+      "ngamma_parent_mass" : 91.905034675,
+      "ngamma_daughter_mass" : 92.906469947
+    },
+    {
+      "pka_filename" : "example_data/Zr094s.asc",
+      "pka_ratios" : 0.17380000,
+      "parent" : "Zr-94",
+      "ngamma_parent_mass" : 93.906310828,
+      "ngamma_daughter_mass" : 94.908038530
+    },
+    {
+      "pka_filename" : "example_data/Zr096s.asc",
+      "pka_ratios" : 0.02800000,
+      "parent" : "Zr-96",
+      "ngamma_parent_mass" : 95.908271433,
+      "ngamma_daughter_mass" : 96.910951206
+    }
+  ],
+  "flux_rescale_value" : 3.25e+14,
+  "assumed_ed" : 40.0,
+  "do_gamma_estimate" : true,
+  "plot_figure" : true
+}

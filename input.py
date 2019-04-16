@@ -2,7 +2,7 @@
 """
 Class definition for input file.
 
-@author Jimin Ma  <majm03@foxmail.com>
+@author Jimin Ma  <majm03@yeah.net>
 @time   2018-09-11
 
 """
@@ -41,7 +41,7 @@ class Input:
     def read_infile(self, file_object=sys.stdout):
         with open(self.infile_name) as f:
             print(">>> START READ INPUT FILE [{}]".format(self.infile_name), file=file_object)
-            data = json.load(f)
+            data = json.load(f, encoding="utf-8")
 
             # Read necessary parameters
             try:

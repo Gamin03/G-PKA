@@ -30,7 +30,7 @@ class SpectrumFig:
             self.ax.loglog(*args, **kwargs)
 
         self.ax.set_xlim(1e-6, 30)
-        self.ax.set_ylim(1e+6, 1e+12)
+        self.ax.set_ylim(1e+6, 1e+14)
         self.ax.legend()
         self.ax.grid(color='grey', which='major', linestyle=':')
         self.ax.set_xlabel('PKA energy ($MeV$)')

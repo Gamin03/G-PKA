@@ -2,7 +2,7 @@
 """
 Class definition for nuclide.
 
-@author Jimin Ma  <majm03@foxmail.com>
+@author Jimin Ma  <majm03@yeah.net>
 @time   2018-09-11
 
 """

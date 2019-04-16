@@ -2,7 +2,7 @@
 """
 Class definition for input file.
 
-@author Jimin Ma  <majm03@foxmail.com>
+@author Jimin Ma  <majm03@yeah.net>
 @time   2018-09-11
 
 """
@@ -74,7 +74,7 @@ def read_pka_file_each_matrix(file_object):
     title = line[:30].strip()
     mtd = int(line[30:35])
     line_right = line[36:].strip().split()
-    ng = line_right[2]
+    ng = int(line_right[2])
 
     if 'matrix' in title:
         # Read the sparse matrix

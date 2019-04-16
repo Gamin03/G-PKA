@@ -4,32 +4,12 @@
 Main for G-pka.
 
 @author Jimin Ma  <majm03@foxmail.com>
-@time   2018-09-11
+@time   2018-09-11 (last update: 2019-04-16)
 @note   Rewritten the old G-PKA.
         - Add class definitions
         - Add the input file.
         - Change the pka xs matrix file into SPECTER-PKA format.
-
-@warning
-        - [未解决的问题]
-        2018/09/14 1) 对于算例，元素Zr的结果，PKA谱型相似，但比SPECTER-PKA要大1-2个量级，有待查找原因！
-                      => 已解决。原因是注意输出是否皈依到一个核素。
-                   2) PKA能谱需要归一到一个靶原子，然后进行输出
-                      => 已解决。2018/09/16
-                   3) (n,gamma)待处理
-                      => 已解决。采用SPECTER-PKA完全相同的方法。
-                   4) Zr-93,95,97 共振区域结果不正确！
-                      => 已解决。注意(n,gamma)散射矩阵的入射和出射能群下标，以及计算特定群的上下群边界值，这些容易出错。
-        2018/09/19 1) 增加dpa损伤计算功能
-                      dpa计算结果不对！PKA归一化结果对，但是PKAs 结果与SPECTER-PKA差1.32倍？
-                   2) 输出结果格式的选择，输出最终PKA和dpa结果数据
-                   3) 输出绘图格式，绘图的多种形式，绘图到文件
-
 """
-# import sys
-# import numpy as np
-# import matplotlib.pyplot as plt
-
 from nuclide import Element, Nuclide, NuclideRecoil
 from input import Input
 from read_pka_file import *
@@ -41,7 +21,7 @@ from utility_output import *
 # Code version control
 _major_version = 0
 _minor_version = 1
-_bugfix_version = 0
+_bugfix_version = 1
 print_code_title_version(_major_version, _minor_version, _bugfix_version)
 
 # Global variables
@@ -55,11 +35,11 @@ if len(sys.argv) == 1:
     input_file = 'input.json'
     output_file = 'output.txt'
 elif len(sys.argv) == 2:
-    input_file = str(sys.argv[0])
+    input_file = str(sys.argv[1])
     output_file = 'output.txt'
 elif len(sys.argv) == 3:
-    input_file = str(sys.argv[0])
-    output_file = str(sys.argv[1])
+    input_file = str(sys.argv[1])
+    output_file = str(sys.argv[2])
 else:
     raise ValueError('Input parameters ERROR!')
 

@@ -2,7 +2,7 @@
 """
 Utility output functions for the code.
 
-@author Jimin Ma  <majm03@foxmail.com>
+@author Jimin Ma  <majm03@yeah.net>
 @time   2018-09-20
 
 """
@@ -128,5 +128,5 @@ def write_total_elements_into_xls(global_element):
         sheet.write(row_values, 1, 'Equivalent NRT dpa')
         # **** 注意这里的40. *** 需修改
         sheet.write(row_values, 3, '{0:10.4E} dpa/s'.format(element.average_displacement_energy * 0.8 / (2. * 40.)))
-    # 保持文件
+    # 保存文件
     book.save('Total_PKAs_elements.xls')
