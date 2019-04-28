@@ -57,7 +57,7 @@ def interpolate_flux_pka_from_input(flux_in, flux_unit, ebound_in, ebound_pka):
 
     ebound_in_mid = (ebound_in[:-1] + ebound_in[1:]) * 0.5
     # interpolate the functions
-    func_interp = interpolate.interp1d(ebound_in_mid, flux_in_per_mev, kind='linear')
+    func_interp = interpolate.interp1d(ebound_in_mid, flux_in_per_mev, kind='linear', fill_value="extrapolate")
     ebound_pka_mid = (ebound_pka[:-1] + ebound_pka[1:]) * 0.5
     flux_pka = func_interp(ebound_pka_mid)
 

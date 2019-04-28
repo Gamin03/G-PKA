@@ -1,11 +1,12 @@
 # G-PKA
 
-> Author: Jimin MA [majm03@yeah.net](majm03@yeah.net)
->
-> Time: 2019-04-16
->
-> Version: v0.1.1
+Author: Jimin MA 
 
+E-mail: *majm03@yeah.net*
+
+Time: 2019-04-16
+
+Version: v0.1.2
 
 
 ## Introduction
