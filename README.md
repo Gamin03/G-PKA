@@ -1,4 +1,4 @@
-# G-PKA
+#  G-PKA
 
 Author: Jimin MA 
 
@@ -9,7 +9,7 @@ Time: 2019-04-16
 Version: v0.1.2
 
 
-## Introduction
+##  Introduction
 
 The code is used to calculate the PKA spectrum and dpa damage cross section of nuclide, element or compound under neutron or proton irradiation.
 
@@ -19,11 +19,11 @@ numpy>=1.15.0, scipy>=1.1.0, xlwt>=1.3.0, json>=2.6.0, matplotlib>=3.0.0
 
 Please cited this paper if needed:
 
-**Jimin Ma, Hongwen Huang. PKA spectra and irradiation damage calculations. 8th Reactor Physics and Nuclear Material Conference. Shenzhen, China, 2017 **
+**Jimin Ma, Hongwen Huang. PKA spectra and irradiation damage calculations. 8th Reactor Physics and Nuclear Material Conference. Shenzhen, China, 2017**
 
-## Run method
+##  Run method
 
-### Requirement
+### Requirement
 
 - input file, default name is 'input.json'. Detail of the input format see next part.
 - spectrum data file.
@@ -34,7 +34,7 @@ Please cited this paper if needed:
 python G-pka.py [input.json] [outout.json]
 ```
 
-### Input file
+### Input file
 
 The G-PKA input file uses *json* format.
 
@@ -60,13 +60,13 @@ Second level parameters in `columns` are:
 | ngamma_parent_mass   | parent nuclide mass ( used in gamma estimate) |
 | ngamma_daughter_mass | daughter mass ( used in gamma estimate)       |
 
-### Result file
+### Result file
 
 The detail pka and dpa values of nuclides are given in *excel* file in G-PKA calculation. Result file names for nuclides and elements are *Total_PKAs_nuclides.xls* and *Total_PKAs_elements.xls*, respectively.
 
 The pka spectrum of nuclide and elements (the first larges 10) are plotted in figures.
 
-### Example
+### Example
 
 The *input.json* file in the root directory is an example which calculate PKA for natural Zr under neutron irradiation in PWR spectrum. The example is same as that in SEPCTRA-PKA. Therequired data and result files are in *test* dirctory. 
 
